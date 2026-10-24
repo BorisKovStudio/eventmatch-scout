@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Scout — Event connection intelligence</title>
+    <link rel="stylesheet" href="/style.css" />
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip" href="#workspace">Skip to workspace</a>
+    <aside class="rail">
+      <a class="brand" href="/" aria-label="Scout home"
+        ><span class="mark" aria-hidden="true">↗</span> scout<span
+          class="brand-dot"
+          >.</span
+        ></a
+      >
+      <p class="rail-kicker">FIELD INTELLIGENCE</p>
+      <nav aria-label="Workspace">
+        <a class="active" href="#workspace">Connection scout <span>01</span></a
+        ><a href="#connections">Connections <span>02</span></a
+        ><a href="#activity">Tool activity <span>03</span></a>
+      </nav>
+      <div class="rail-note">
+        <span class="small-dot"></span> Private workspace
+        <p>An independent application.<br />Powered by the EventMatch API.</p>
+      </div>
+    </aside>
+    <div class="shell">
+      <header>
+        <div>
+          <span class="eyebrow">PATCH THE CONFERENCE / OCT 24, 2026</span>
+          <p>
+            Scout workspace <span class="header-sep">/</span> Connection
+            intelligence
+          </p>
+        </div>
+        <span class="private-label">◈ Private demo workspace</span>
+      </header>
+      <main id="workspace">
+        <div class="page-title">
+          <div>
+            <p class="eyebrow">FROM A ROOM OF PEOPLE TO A REASON TO MEET</p>
+            <h1>Find the connection.</h1>
+            <p class="intro">
+              Your private brief. EventMatch’s People. Public evidence.<br />One
+              traceable path through the graph.
+            </p>
+          </div>
+          <div class="event-label">
+            <span class="small-dot"></span> Selected live event<strong
+              >Patch the Conference</strong
+            ><span>Bright Data · WeMakeDevs · San Francisco</span>
+          </div>
+        </div>
+        <div class="work-grid">
+          <section class="brief" aria-labelledby="brief-heading">
+            <div class="section-top">
+              <span class="section-number">01</span>
+              <h2 id="brief-heading">Your private brief</h2>
+            </div>
+            <p class="helper">
+              The included brief is demo-safe. It is never sent to Bright Data.
+            </p>
+            <form id="run-form">
+              <label for="brief-name">Project</label
+              ><input
+                id="brief-name"
+                name="name"
+                maxlength="120"
+                required
+                value="EventMatch · demonstration brief"
+              />
+              <label for="goal">What are you looking for?</label
+              ><textarea
+                id="goal"
+                name="goal"
+                rows="4"
+                maxlength="1500"
+                minlength="10"
+                required
+              >
+Find a technical integration partner. Prefer new connections; verify every claim before a conversation.</textarea
+              >
+              <label for="topic">Connection lens</label
+              ><select id="topic" name="topic">
+                <option value="mcp">MCP integrations</option>
+                <option value="graph">Graph reasoning</option>
+                <option value="web">Public web research</option>
+              </select>
+              <label for="known">Companies you already know</label
+              ><input
+                id="known"
+                name="known"
+                maxlength="1000"
+                value="Sample Existing Partner"
+              />
+              <p class="field-note">
+                Comma-separated. Excluded by the graph query.
+              </p>
+              <fieldset>
+                <legend>Data mode</legend>
+                <label class="mode-choice"
+                  ><input
+                    type="radio"
+                    name="mode"
+                    value="synthetic"
+                    checked
+                  /><span
+                    ><strong>Synthetic rehearsal</strong
+                    ><small
+                      >Sample People + sources. Real FalkorDB query.</small
+                    ></span
+                  ></label
+                ><label class="mode-choice"
+                  ><input type="radio" name="mode" value="live" /><span
+                    ><strong>Today’s real event</strong
+                    ><small
+                      >EventMatch API + Bright Data. Requires access.</small
+                    ></span
+                  ></label
+                >
+              </fieldset>
+              <button class="primary" type="submit" id="run-button">
+                Find connection paths <span aria-hidden="true">↗</span>
+              </button>
+              <p class="field-note">
+                Up to 10 API records · 3 company sources · 3 results
+              </p>
+            </form>
+          </section>
+          <section class="results" aria-labelledby="results-heading">
+            <div class="section-top">
+              <span class="section-number">02</span>
+              <h2 id="results-heading">Connection paths</h2>
+              <span class="result-mode" id="result-mode">Ready to explore</span>
+            </div>
+            <div id="run-status" role="status" aria-live="polite">
+              Choose a lens and run the bounded scenario.
+            </div>
+            <progress
+              id="progress"
+              aria-label="Running connection analysis"
+              hidden
+            ></progress>
+            <div class="empty-state" id="empty">
+              <div class="route-art" aria-hidden="true">
+                <span class="route-point brief-point">Private brief</span><i></i
+                ><span class="route-point">Capability</span><i></i
+                ><span class="route-point">Public source</span><i></i
+                ><span class="route-point company-point">Company</span><i></i
+                ><span class="route-point">Person at event</span>
+              </div>
+              <h3>Not another list of names.</h3>
+              <p>
+                See why a connection matters, which sources support it,<br />and
+                what still needs a human conversation.
+              </p>
+              <span class="illustration-label"
+                >Workflow illustration — no results generated yet</span
+              >
+            </div>
+            <div id="matches"></div>
+            <div id="run-summary" class="run-summary" hidden></div>
+            <div class="boundary">
+              <span aria-hidden="true">↳</span>
+              <p>
+                <strong>Evidence, not a promise.</strong> A profile association
+                or document mention does not prove current employment,
+                compatibility, buying intent, or physical attendance.
+              </p>
+            </div>
+          </section>
+        </div>
+        <section
+          id="connections"
+          class="connections"
+          aria-labelledby="connection-heading"
+        >
+          <div class="section-top">
+            <span class="section-number">03</span>
+            <h2 id="connection-heading">Connections</h2>
+            <button id="refresh-status" class="text-button" type="button">
+              Check status ↻
+            </button>
+          </div>
+          <div class="service-row">
+            <div>
+              <span>GRAPH ENGINE</span><strong>FalkorDB</strong
+              ><small id="db-status">Checking verified TLS connection…</small>
+            </div>
+            <div>
+              <span>EVENT + PEOPLE DATA</span><strong>EventMatch API</strong
+              ><small id="em-status">Not checked</small>
+            </div>
+            <div>
+              <span>PUBLIC WEB EVIDENCE</span><strong>Bright Data</strong
+              ><small id="bd-status">Not checked</small>
+            </div>
+          </div>
+          <details>
+            <summary>Configure API credentials</summary>
+            <p class="helper">
+              Enter credentials here, never in chat. Stored encrypted in Scout’s
+              private database; values are not returned. No plan purchase, zone
+              creation or top-up is performed.
+            </p>
+            <form id="credentials-form" class="credential-fields">
+              <label
+                >EventMatch API key<input
+                  type="password"
+                  name="eventmatchKey"
+                  autocomplete="off"
+                  maxlength="4096"
+                  placeholder="Read-only key from an API-enabled workspace" /></label
+              ><label
+                >Bright Data API key<input
+                  type="password"
+                  name="brightdataKey"
+                  autocomplete="off"
+                  maxlength="4096"
+                  placeholder="Hackathon account only" /></label
+              ><label
+                >Existing Web Unlocker zone<input
+                  name="brightdataZone"
+                  autocomplete="off"
+                  maxlength="100"
+                  pattern="[a-zA-Z0-9_-]+"
+                  placeholder="Existing reviewed zone" /></label
+              ><button class="secondary" type="submit">Save connections</button>
+              <p id="credential-status" role="status"></p>
+            </form>
+          </details>
+        </section>
+        <section
+          id="activity"
+          class="activity"
+          aria-labelledby="activity-heading"
+        >
+          <div class="section-top">
+            <span class="section-number">04</span>
+            <h2 id="activity-heading">Tool activity</h2>
+            <span class="field-note"
+              >Actual execution receipts, not simulated progress</span
+            >
+          </div>
+          <ol id="trace">
+            <li class="trace-empty">
+              Run a scenario to see its API reads and graph query.
+            </li>
+          </ol>
+          <details id="query-details" hidden>
+            <summary>Inspect the executed Cypher query</summary>
+            <pre id="query"></pre>
+          </details>
+        </section>
+        <footer>
+          <span>SCOUT / An external EventMatch integration</span
+          ><span>No outreach sent. No registrations made.</span>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

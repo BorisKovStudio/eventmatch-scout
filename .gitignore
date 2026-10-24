@@ -1,0 +1,11 @@
+node_modules/
+.env
+.env.*
+!.env.example
+.vercel/
+.scout-data/
+*.log
+
+# Operator-only infrastructure receipts and trust material
+INFRASTRUCTURE.md
+deploy/falkordb-ca.crt
